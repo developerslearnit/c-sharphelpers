@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFrameworks>netstandard2.0;netstandard2.1;net45;net451;net452;net46;net461;net462;net47;net472;netcoreapp3.1;net5.0</TargetFrameworks>
+    <PackageId>MarkDev.Utils.CSharpHelpers</PackageId>
+    <Authors>Adesina Mark Omoniyi</Authors>
+    <Company>DevloperslearnIt</Company>
+    <Description>This package comprises of collections of C# helper methods that are used every day by c-sharp developers. You dont have to write these helper functions yourself</Description>
+    <Copyright></Copyright>
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageProjectUrl></PackageProjectUrl>
+    <RepositoryUrl>https://github.com/developerslearnit/c-sharphelpers</RepositoryUrl>
+    <PackageTags>c#-utils,c-sharp-helpers, csharputils</PackageTags>
+    <PackageIcon>C-Sharp-Helper.png</PackageIcon>
+    <PackageIconUrl />
+  </PropertyGroup>
+
+</Project>
