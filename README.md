@@ -46,3 +46,60 @@ var name = "somebase64string";
 var rawString = name.FromBase64();
 
 ```
+
+### Helpers.IsValidEmail() - Verifies that a string is in valid e-mail format. 
+
+Usage
+
+```
+var email = "name@somedomain.com";
+
+var isValid = email.IsValidEmail();
+
+```
+
+### Helpers.ToBool() -  Converts string to its boolean equivalent. 
+
+Usage
+
+```
+var someVal = "true";
+
+var isBool = someVal.ToBool();
+
+```
+### Helpers.EmptyIfNull() -  Returns an empty string if null or empty is passed. 
+
+Usage
+
+```
+var someVal = "";
+
+var val = someVal.EmptyIfNull();
+
+```
+
+### Helpers.EncryptToDES(string key) -  Encrypt value with DES Algorithm. 
+
+Usage
+
+```
+var someVal = "Some plain text to be encrypted";
+var key ="mysecretKey";
+
+var encryptedVal = someVal.EncryptToDES(key);
+
+```
+
+
+### Helpers.DecryptFromDES(string key) -  decrypt value with DES Algorithm. 
+
+Usage
+
+```
+var someVal = "Some encrypted value";
+var key ="mysecretKey";
+
+var decryptedVal = someVal.DecryptFromDES(key);
+
+```
