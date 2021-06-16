@@ -1,10 +1,15 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Globalization;
+using System.Security.Cryptography;
 using System.Text;
 using System.Text.RegularExpressions;
 
 namespace CSharpHelpers
 {
+    /// <summary>
+    /// 
+    /// </summary>
     public static class Helpers
     {
         /// <summary>
@@ -195,6 +200,114 @@ namespace CSharpHelpers
             }
             val = new String(chars);
             return val;
+        }
+
+
+
+        /// <summary>
+        /// Encrypt value with DES Algorithm
+        /// </summary>
+        /// <param name="source"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string EncryptToDES(this string source, string key)
+        {
+            TripleDESCryptoServiceProvider desCryptoProvider = new TripleDESCryptoServiceProvider();
+            MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider();
+
+            byte[] byteHash;
+            byte[] byteBuff;
+
+            byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
+            desCryptoProvider.Key = byteHash;
+            desCryptoProvider.Mode = CipherMode.ECB; //CBC, CFB
+            byteBuff = Encoding.UTF8.GetBytes(source);
+
+            string encoded =
+                Convert.ToBase64String(desCryptoProvider.CreateEncryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
+            return encoded;
+        }
+
+        /// <summary>
+        /// decrypt value with DES Algorithm
+        /// </summary>
+        /// <param name="encodedText"></param>
+        /// <param name="key"></param>
+        /// <returns></returns>
+        public static string DecryptFromDES(this string encodedText, string key)
+        {
+            TripleDESCryptoServiceProvider desCryptoProvider = new TripleDESCryptoServiceProvider();
+            MD5CryptoServiceProvider hashMD5Provider = new MD5CryptoServiceProvider();
+
+            byte[] byteHash;
+            byte[] byteBuff;
+
+            byteHash = hashMD5Provider.ComputeHash(Encoding.UTF8.GetBytes(key));
+            desCryptoProvider.Key = byteHash;
+            desCryptoProvider.Mode = CipherMode.ECB; //CBC, CFB
+            byteBuff = Convert.FromBase64String(encodedText);
+
+            string plaintext = Encoding.UTF8.GetString(desCryptoProvider.CreateDecryptor().TransformFinalBlock(byteBuff, 0, byteBuff.Length));
+            return plaintext;
+        }
+
+        /// <summary>
+        /// Compare two arrasy
+        /// </summary>
+        /// <typeparam name="T">Type</typeparam>
+        /// <param name="a1">Array 1</param>
+        /// <param name="a2">Array 2</param>
+        /// <returns>Result</returns>
+        public static bool ArraysEqual<T>(T[] a1, T[] a2)
+        {
+            //also see Enumerable.SequenceEqual(a1, a2);
+            if (ReferenceEquals(a1, a2))
+                return true;
+
+            if (a1 == null || a2 == null)
+                return false;
+
+            if (a1.Length != a2.Length)
+                return false;
+
+            var comparer = EqualityComparer<T>.Default;
+            for (int i = 0; i < a1.Length; i++)
+            {
+                if (!comparer.Equals(a1[i], a2[i])) return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// Encrypt string value with SHA512 Alg
+        /// </summary>
+        /// <param name="value">Value to encrypt</param>
+        /// <param name="salt">Encryption Salt</param>
+        /// <returns>Encrypted string</returns>
+        public static string EncryptSha512(this string value, string salt)
+        {
+
+            System.Text.ASCIIEncoding encoding = new System.Text.ASCIIEncoding();
+            byte[] keyByte = encoding.GetBytes(salt);
+            HMACSHA512 hMACSHA = new HMACSHA512(keyByte);
+
+            byte[] messageBytes = encoding.GetBytes(value);
+            byte[] hashmessage = hMACSHA.ComputeHash(messageBytes);
+
+            return ByteToString(hashmessage);
+        }
+
+
+
+        private static string ByteToString(byte[] buff)
+        {
+            string sbinary = "";
+
+            for (int i = 0; i < buff.Length; i++)
+            {
+                sbinary += buff[i].ToString("X2"); // hex format
+            }
+            return (sbinary);
         }
 
 

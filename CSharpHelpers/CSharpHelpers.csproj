@@ -11,8 +11,10 @@
     <PackageProjectUrl></PackageProjectUrl>
     <RepositoryUrl>https://github.com/developerslearnit/c-sharphelpers</RepositoryUrl>
     <PackageTags>c#-utils,c-sharp-helpers, csharputils</PackageTags>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
     <PackageIcon>C-Sharp-Helper.png</PackageIcon>
     <PackageIconUrl />
+    <Version>1.0.1</Version>
   </PropertyGroup>
 
   <ItemGroup>
