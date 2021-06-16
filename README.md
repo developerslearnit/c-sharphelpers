@@ -1,6 +1,11 @@
 # C-Sharp Helpers
 This package comprises of collections of C# helper methods that are used every day by c-sharp developers. You don't have to write these helper functions yourself. There are currenlty eleven helper methods - still growing.
 
+## Donation [![Donate](https://img.shields.io/badge/Donate-PayPal-green.svg)](https://www.paypal.me/markadesina) 
+If this project help you reduce time to develop, you can give me a cup of coffee (or a Beer of course) :)
+
+[![Support via PayPal](https://cdn.rawgit.com/twolfson/paypal-github-button/1.0.0/dist/button.svg)](https://www.paypal.me/markadesina) 
+
 Helpers
 ---------------
 ### Helpers.Right(int length) - Get substring of specified number of characters on the right. 
